@@ -9,7 +9,7 @@ router.get('/', function(req, res){
 })
 
 router.post('/login', function(req, res){
-  console.log(req.body);
+  // console.log(req.body);
 
   let plainPassword = req.body.password;
 
@@ -17,10 +17,16 @@ router.post('/login', function(req, res){
     db.Company.findOne({where:{email: req.body.email}})
       .then(company =>{
 
-        bcrypt.compare(plainPassword, company.password, function(err, res) {
-         if(res) {
+        bcrypt.compare(plainPassword, company.password, function(err, result) {
+         if(result) {
           // Passwords match
-          console.log('Kesini');
+          // console.log('Kesini');
+          req.session.company = company;
+          req.session.role = 'company';
+          console.log(req.session.company);
+          console.log(req.session.role);
+          res.redirect('/');
+          // res.send(req.session.company, req.session.role);
          } else {
           // Passwords don't match
          }
@@ -34,10 +40,16 @@ router.post('/login', function(req, res){
     db.Candidate.findOne({where:{email: req.body.email}})
       .then(candidate =>{
 
-        bcrypt.compare(plainPassword, candidate.password, function(err, res) {
-         if(res) {
+        bcrypt.compare(plainPassword, candidate.password, function(err, result) {
+         if(result) {
           // Passwords match
-          console.log('Kesini');
+
+          req.session.candidate = candidate;
+          req.session.role = 'candidate';
+          // console.log(req.session.candidate);
+          // console.log(req.session.role);
+          res.redirect('/');
+          // res.send(req.session.company, req.session.role);
          } else {
           // Passwords don't match
          }
@@ -89,6 +101,12 @@ router.post('/register', function(req, res){
     });
   });
 
+})
+
+router.get('/logout', function(req,res){
+  req.session.destroy(function(err) {
+    res.redirect('/')// cannot access session here
+  })
 })
 
 module.exports = router;

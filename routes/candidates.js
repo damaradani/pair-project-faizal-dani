@@ -2,6 +2,16 @@ const express = require('express')
 const router = express.Router();
 const db = require('../models/');
 
+
+router.use(function(req, res, next){
+  console.log(req.session);
+  if(req.session.role == 'candidate'){
+    next()
+  }else{
+    res.redirect('/');
+  }
+})
+
 //halaman utama Candidates
 router.get('/', function(req, res){
   db.Job_vacancy.findAll(
@@ -16,6 +26,7 @@ router.get('/', function(req, res){
     })
 
 })
+
 
 //halaman Edit Profile
 router.get('/edit', function(req, res){

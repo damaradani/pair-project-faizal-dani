@@ -4,6 +4,17 @@ const db = require('../models');
 
 //edit profile, add/delete vacancies, view applicants, change status
 
+router.use(function(req, res, next){
+  // console.log(req.session.role);
+  // console.log(req.session.company);
+
+  if(req.session.role == 'company'){
+    next()
+  }else{
+    res.redirect('/');
+  }
+})
+
 router.get('/', (req, res) => {
 
   db.Company.findOne(
@@ -31,6 +42,7 @@ router.get('/', (req, res) => {
 
     })
     .catch()
+
 })
 
 router.get('/addvacancy/:id', (req, res) => {

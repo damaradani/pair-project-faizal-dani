@@ -13,6 +13,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Job_vacancy.associate = function(models) {
     // associations can be defined here
+    Job_vacancy.belongsToMany(models.Candidate, {
+      through: models.Candidates_job
+    })
+
+    Job_vacancy.hasMany(models.Candidates_job);
+
+    Job_vacancy.belongsTo(models.Company);
   };
   return Job_vacancy;
 };

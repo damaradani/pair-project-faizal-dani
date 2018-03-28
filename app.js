@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const db = require('./models/');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}))

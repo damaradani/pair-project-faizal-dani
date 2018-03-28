@@ -17,20 +17,32 @@ router.use(function(req, res, next){
 
 router.get('/', (req, res) => {
 
-  // db.Job_vacancy.findAll({
-  //   order: ['id'],
-  //   include: [{
-  //     model: db.Company,
-  //     as: 'Company' // specifies how we want to be able to access our joined rows on the returned data
-  //   }]
-  // })
-  // .then(jobs =>{
-  //   db.Company.findAll()
-  //   .then(vacancies => {
-  //     res.render('company/index', {jobs: jobs, vacancies: vacancies})
-  //   })
-  // })
-  // .catch(console.error)
+  db.Company.findOne(
+      {
+        where:{id:1}, //belom ada session jadi pake id 1 dulu buat coba
+        include:[
+          {
+            model: db.Job_vacancy,
+            include: [db.Candidate]
+          }
+        ]}
+      )
+    .then(jobs =>{
+      // console.log(JSON.stringify(x, null, 2));
+
+      // db.Job_vacancy.findAll({
+      //   where:{CompanyId:1},
+      // }).then(vacancies =>{
+        res.render('company/index', {jobs: jobs})
+      // })
+
+      // res.render('company/index', {jobs: jobs})
+      // console.log(JSON.stringify(jobs.Job_vacancies[0].Candidates[0].Candidates_job));
+      // console.log(JSON.stringify(jobs.Job_vacancies[0].name));
+
+    })
+    .catch()
+
 })
 
 router.get('/addvacancy/:id', (req, res) => {
@@ -48,7 +60,7 @@ router.post('/addvacancy/:id', (req, res) => {
     status: 'open',
     CompanyId: req.params.id
   }).then( itemdata => {
-    res.redirect('/')
+    res.render('/company')
   })
 })
 
@@ -70,7 +82,7 @@ router.post('/:id/edit', (req, res) => {
     where: { id: req.params.id }
   }).then(
     // (companyUpdated) => {
-  res.redirect('/company')
+  res.render('/company')
   //}
 )
 })

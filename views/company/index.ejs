@@ -5,54 +5,54 @@
     <title>Company's profile</title>
   </head>
   <body>
-    <!-- edit profile
-    view vancacies/edit/delete ===> view applicants
-    add vacancies -->
-    <a href="/...">Edit Profile</a>
 
-    <% item.forEach(vacancies => {%>
+    <a href="/company/:id/edit">Edit Profile</a>
+
+
+    <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
       <div>
-        <%= vacancies.name %>
-        <%= vacancies.field_of_work %>
-        <%= vacancies.salary %>
-        <%= vacancies.status %>
+        <%= jobs.Job_vacancies[i].name %>
+        <%= jobs.Job_vacancies[i].field_of_work %>
+        <%= jobs.Job_vacancies[i].salary %>
+        <%= jobs.Job_vacancies[i].status %>
       </div>
-    <% }) %>
+    <% } %>
 
     <a href="/company/addvacancy/????">Add Vacancies</a>
 
-    <!-- <table>
+    <table>
       <thead>
         <th> Name </th>
-        <th> Gender </th>
         <th> Age </th>
         <th> Location </th>
         <th> Email </th>
         <th> Field of Work </th>
         <th> Experience </th>
+        <th> Apply to </th>
         <th> Action </th>
       </thead>
 
       <tbody>
-        <% item.forEach(jobs => {%>
-          <tr>
-            <td> <%= jobs.name %> </td>
-            <td> <%= jobs.gender %> </td>
-            <td> <%= jobs.age %> </td>
-            <td> <%= jobs.location %> </td>
-            <td> <%= jobs.email %> </td>
-            <td> <%= jobs.field_of_work %> </td>
-            <td> <%= jobs.experience %> </td>
-            <td>
-              <a href="/...">Accept</a>
-              |
-              <a href="#" onclick="return confirmDel(<%= item.id %>)">Decline</a>
-            </td>
-          </tr>
-        <% }) %>
+        <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
+          <% for (var j = 0; j < jobs.Job_vacancies[i].Candidates.length; j++) {%>
+            <tr>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].name %> </td>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].age %> </td>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].location %> </td>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].email %> </td>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].field_of_work %> </td>
+              <td> <%= jobs.Job_vacancies[i].Candidates[j].experience %> </td>
+              <td> <%= jobs.Job_vacancies[i].name %> </td>
+              <td>
+                <a href="/">Accept</a>
+                |
+                <a href="/">Decline</a>
+              </td>
+            </tr>
+          <% } %>
+        <% } %>
       </tbody>
-    </table> -->
-
+    </table>
 
   </body>
 </html>

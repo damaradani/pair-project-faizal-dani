@@ -1,1 +1,58 @@
-Company Index
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Company's profile</title>
+  </head>
+  <body>
+    <!-- edit profile
+    view vancacies/edit/delete ===> view applicants
+    add vacancies -->
+    <a href="/...">Edit Profile</a>
+
+    <% item.forEach(vacancies => {%>
+      <div>
+        <%= vacancies.name %>
+        <%= vacancies.field_of_work %>
+        <%= vacancies.salary %>
+        <%= vacancies.status %>
+      </div>
+    <% }) %>
+
+    <a href="/company/addvacancy/????">Add Vacancies</a>
+
+    <!-- <table>
+      <thead>
+        <th> Name </th>
+        <th> Gender </th>
+        <th> Age </th>
+        <th> Location </th>
+        <th> Email </th>
+        <th> Field of Work </th>
+        <th> Experience </th>
+        <th> Action </th>
+      </thead>
+
+      <tbody>
+        <% item.forEach(jobs => {%>
+          <tr>
+            <td> <%= jobs.name %> </td>
+            <td> <%= jobs.gender %> </td>
+            <td> <%= jobs.age %> </td>
+            <td> <%= jobs.location %> </td>
+            <td> <%= jobs.email %> </td>
+            <td> <%= jobs.field_of_work %> </td>
+            <td> <%= jobs.experience %> </td>
+            <td>
+              <a href="/...">Accept</a>
+              |
+              <a href="#" onclick="return confirmDel(<%= item.id %>)">Decline</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table> -->
+
+
+  </body>
+</html>

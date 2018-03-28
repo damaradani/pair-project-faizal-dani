@@ -1,1 +1,43 @@
-Udah index ejs
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+  </head>
+  <body>
+
+    <h2> Login </h2>
+
+    <form action="/login" method="POST">
+      Email:<br>
+      <input type="text" name="email" value="">
+      <br>
+      Password:<br>
+      <input type="password" name="password" value="">
+      <br><br>
+
+      <input type="radio" name="option" value="candidate" checked> Candidate
+      <input type="radio" name="option" value="company"> Company
+
+      <br><br>
+      <input type="submit" value="Login">
+    </form>
+
+    <h2> Register </h2>
+
+    <form action="/register" method="POST">
+      Email:<br>
+      <input type="text" name="email" value="">
+      <br>
+      Password:<br>
+      <input type="password" name="password" value="">
+      <br><br>
+
+      <input type="radio" name="option" value="candidate" checked> Candidate
+      <input type="radio" name="option" value="company"> Company
+
+      <br><br>
+      <input type="submit" value="Register">
+    </form>
+  </body>
+</html>

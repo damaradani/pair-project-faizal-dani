@@ -1,0 +1,27 @@
+<html>
+  <body>
+
+    <h2> Company Form </h2>
+
+    <form action="/company/<%= company.id %>/edit" method="POST">
+      Name:<br>
+      <input type="text" name="name" value="<%= company.name %>">
+      <br>
+      Location:<br>
+      <input type="text" name="location" value="<%= company.location %>">
+      <br>
+      Email:<br>
+      <input type="text" name="email" value="<%= company.email %>">
+      <br>
+      Website:<br>
+      <input type="text" name="website" value="<%= company.website %>">
+      <br>
+      Phone Number:<br>
+      <input type="text" name="phone" value="<%= company.phone %>">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+
+  </body>
+</html>

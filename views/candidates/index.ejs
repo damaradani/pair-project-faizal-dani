@@ -1,2 +1,35 @@
+<html>
+  <head>
+    <title>
 
-Halaman Utama Candidates
+    </title>
+    <style>
+    .JobsVacancyView {
+        text-align: left;
+        background-color: #f2f2f2;
+        margin: 20px;
+        padding: 20px;
+    }
+    a:link, a:visited {
+      background: blue;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    </style>
+  </head>
+  <body>
+    <% for(let i = 0; i < Jobs.length; i++) {%>
+      <div class="JobsVacancyView">
+        <h3><%= Jobs[i].name %></h3>
+        <h4><%= Jobs[i].Company.name %><br><br>
+          Location: <%= Jobs[i].Company.location %><br>
+          Sallary: <%= Jobs[i].salary %>
+        </h4>
+        <a href="/candidates/apply/<%= Jobs[i].id %>">Apply</a>
+      </div>
+    <% } %>
+  </body>
+</html>

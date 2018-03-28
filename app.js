@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }))
 

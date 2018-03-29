@@ -35,7 +35,7 @@ const db = require('./models/');
 
 // db.Candidates_job.findAll(
 //     {
-//       where:{id:1},
+//       where:{id:1, Candidate},
 //       include:[db.Candidate,
 //         {
 //           model: db.Job_vacancy,
@@ -49,6 +49,22 @@ const db = require('./models/');
 //   })
 //   .catch()
 
+// db.Candidate.findOne({where:{id:1}})
+//   .then(candidates =>{
+//     console.log(candidates);
+//     db.Job_vacancy.findAll(
+//         {
+//           include:[db.Company]
+//         }
+//       )
+//       .then(x =>{
+//         console.log(JSON.stringify(x, null, 2));
+//       })
+//       .catch()
+//   })
+//   .catch()
+
+
 // db.Candidates_job.showCandidatesApply(5, db.Candidate, db.Job_vacancy, db.Company)
 //   .then(candidatesJob =>{
 //     console.log(JSON.stringify(candidatesJob, null, 2));
@@ -57,14 +73,14 @@ const db = require('./models/');
 //     console.log(err);
 //   })
 
-db.Candidates_job.showJobVacancy(5, db.Candidate, db.Job_vacancy, db.Company)
-  .then(Job_vacancy =>{
-    console.log(JSON.stringify(Job_vacancy, null, 2));
-  })
-  .catch(err =>{
-    console.log(err.message);
-  })
-  
+// db.Candidates_job.showJobVacancy(5, db.Candidate, db.Job_vacancy, db.Company)
+//   .then(Job_vacancy =>{
+//     console.log(JSON.stringify(Job_vacancy, null, 2));
+//   })
+//   .catch(err =>{
+//     console.log(err.message);
+//   })
+
 // db.Job_vacancy.findAll(
 //       {include:[db.Company]}
 //     )

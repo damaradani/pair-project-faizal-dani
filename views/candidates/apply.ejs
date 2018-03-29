@@ -3,6 +3,7 @@
 
   </head>
   <body>
+    <h2>Applied Job vacancies</h2>
     <table>
       <thead>
         <tr>
@@ -10,9 +11,21 @@
           <th>Company</th>
           <th>Apply Date</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
+        <% for (let i = 0; i < candidatesJob.length; i++) {%>
+          <tr>
+            <td><%= candidatesJob[i].Job_vacancy.name %></td>
+            <td><%= candidatesJob[i].Job_vacancy.Company.name %></td>
+            <td><%= convertDate(candidatesJob[i].createdAt) %></td>
+            <td><%= candidatesJob[i].status %></td>
+            <td>
+              <a href="/candidates/apply/delete/<%= candidatesJob[i].CandidateId %>/<%= candidatesJob[i].JobVacancyId %>" onClick="return confirm('delete this Items: <%= candidatesJob[i].Job_vacancy.name%>?')">Delete</a>
+            </td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
   </body>

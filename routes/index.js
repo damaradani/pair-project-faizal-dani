@@ -72,25 +72,32 @@ router.post('/register', function(req, res){
       let passwordAfterBcrypt = hash;// console.log(hash);
       // console.log(salt);
       if (req.body.option === 'company') {
+
         db.Company.create({
             email: req.body.email,
             password: passwordAfterBcrypt
           })
           .then(company => {
-            console.log(company);
+            // console.log(company);
+            req.session.company = company;
+            req.session.role = 'company';
+
             res.render('company_form', { company: company })
           })
           .catch()
         // res.render('company_form', {company: req.body})
       } else {
         //Candidates
+
         db.Candidate.create({
             email: req.body.email,
             password: passwordAfterBcrypt
         })
         .then(candidate =>{
-            console.log(candidate);
-            res.render('candidates/editProfile')
+            req.session.candidate = candidate;
+            req.session.role = 'candidate';
+            // console.log(candidate);
+            res.render('candidates/editProfile', {candidate})
         })
         .catch(err =>{
             console.log(err.message);

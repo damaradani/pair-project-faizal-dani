@@ -32,13 +32,38 @@ const db = require('./models/');
 //   })
 //   .catch()
 
-db.Job_vacancy.findAll(
-      {include:[db.Company]}
-    )
-  .then(x =>{
-    console.log(JSON.stringify(x, null, 2));
+
+// db.Candidates_job.findAll(
+//     {
+//       where:{id:1},
+//       include:[db.Candidate,
+//         {
+//           model: db.Job_vacancy,
+//           include: [db.Company]
+//         }
+//       ]
+//     }
+//   )
+//   .then(x =>{
+//     console.log(JSON.stringify(x, null, 2));
+//   })
+//   .catch()
+
+db.Candidates_job.showCandidatesApply(5, db.Candidate, db.Job_vacancy, db.Company)
+  .then(candidatesJob =>{
+    console.log(JSON.stringify(candidatesJob, null, 2));
   })
-  .catch()
+  .catch(err =>{
+    console.log(err);
+  })
+
+// db.Job_vacancy.findAll(
+//       {include:[db.Company]}
+//     )
+//   .then(x =>{
+//     console.log(JSON.stringify(x, null, 2));
+//   })
+//   .catch()
 
 
 

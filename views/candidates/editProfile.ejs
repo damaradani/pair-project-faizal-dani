@@ -6,9 +6,9 @@
   </head>
   <body>
     <h2>Edit Profile</h2>
-    <form action="" method="POST">
+    <form action="/candidates/edit" method="POST">
       <label for="name">Name :</label><br>
-      <input type="text" name="name" /><br><br>
+      <input type="text" name="name" value="<%= candidate.name %>"/><br><br>
 
       <label for="gender">Gender :</label><br>
       <select name="gender">
@@ -17,25 +17,25 @@
       </select><br><br>
 
       <label for="age">Age :</label><br>
-      <input type="text" name="age" /><br><br>
+      <input type="text" name="age" value="<%= candidate.age %>" /><br><br>
 
       <label for="location">Location :</label><br>
-      <input type="text" name="location" /><br><br>
+      <input type="text" name="location" value="<%= candidate.location %>"/><br><br>
 
       <label for="email">Email :</label><br>
-      <input type="text" name="email" /><br><br>
+      <input type="text" name="email" value="<%= candidate.email %>" /><br><br>
 
       <label for="phone">Phone :</label><br>
-      <input type="text" name="phone" /><br><br>
+      <input type="text" name="phone" value="<%= candidate.phone %>"/><br><br>
 
       <label for="expected_sallary">Expected Sallary :</label><br>
-      <input type="text" name="expected_sallary" /><br><br>
+      <input type="text" name="expected_sallary" value="<%= candidate.expected_sallary %>" /><br><br>
 
       <label for="experience">Experience :</label><br>
-      <input type="text" name="experience" placeholder="dalam Tahun"/><br><br>
+      <input type="text" name="experience" value="<%= candidate.experience %>" placeholder="dalam Tahun"/><br><br>
 
       <label for="field_of_work">Field of Work :</label><br>
-      <input type="text" name="field_of_work" /><br><br>
+      <input type="text" name="field_of_work" value="<%= candidate.field_of_work %>" /><br><br>
 
       <label for="education">Education :</label><br>
       <select name="education">

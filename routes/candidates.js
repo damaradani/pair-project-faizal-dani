@@ -49,7 +49,7 @@ router.get('/apply/:Jobsid', function(req, res){
   //nanti masuk ke halaman dimana isinya tabel daftar
   //Jobs yang sudah di apply
 
-  res.render('candidates/apply', )
+  res.render('candidates/apply' )
 })
 
 

@@ -117,35 +117,55 @@ const db = require('./models/');
 //     console.log(err.message);
 //   })
 
+// db.Candidate.findOne(
+//    {
+//      where:{id:1}
+//    }
+//    )
+//  .then(Candidate =>{
+//    console.log(Candidate);
+//    db.Job_vacancy.findAll(
+//        {
+//          include: [{
+//            model: db.Company,
+//            where: { location: Candidate.location},
+//            as: 'Company' // specifies how we want to be able to access our joined rows on the returned data
+//          }]
+//          // ,
+//          //   where: {db.Company.location : 'Depok'}
+//
+//        })
+//      .then(Jobs =>{
+//        console.log(JSON.stringify(Jobs, null, 2));
+//
+//      })
+//      .catch(err =>{
+//        console.log(err);
+//      })
+//  })
+//  .catch(err =>{
+//    console.log(err);
+//  })
+
 db.Candidate.findOne(
    {
      where:{id:1}
    }
    )
- .then(Candidate =>{
-   console.log(Candidate);
-   db.Job_vacancy.findAll(
-       {
-         include: [{
-           model: db.Company,
-           where: { location: Candidate.location},
-           as: 'Company' // specifies how we want to be able to access our joined rows on the returned data
-         }]
-         // ,
-         //   where: {db.Company.location : 'Depok'}
-
-       })
-     .then(Jobs =>{
-       console.log(JSON.stringify(Jobs, null, 2));
-       
+ .then(candidate =>{
+    db.Job_vacancy.findAll(
+     {
+       where: { salary:
+         {
+         $gte: candidate.expected_salary
+       }}
      })
-     .catch(err =>{
-       console.log(err);
-     })
- })
- .catch(err =>{
-   console.log(err);
- })
+    .then(Jobs =>{
+     console.log(JSON.stringify(x, null, 2));
+    })
+    .catch()
+  })
+ .catch()
 
 //contoh dari stack overflow
 // models.products.findAll({

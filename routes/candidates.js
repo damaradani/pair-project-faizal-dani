@@ -78,6 +78,35 @@ router.get('/byLocation', function(req, res){
    })
 })
 
+router.get('/bySallary', function(req, res){
+  let candidateId = req.session.candidate.id;
+
+  db.Candidate.findOne(
+     {
+       where:{id:candidateId}
+     }
+     )
+   .then(candidate =>{
+     // console.log(candidate);
+      db.Job_vacancy.findAll(
+       {
+         where: { salary:
+           {
+           $gte: candidate.expected_sallary
+         }},
+         include:[db.Company]
+       })
+      .then(Jobs =>{
+        console.log(JSON.stringify(Jobs, null, 2));
+        res.render('candidates/bySallary', {Jobs})
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
+   .catch()
+})
+
 
 //halaman Edit Profile
 router.get('/edit', function(req, res){

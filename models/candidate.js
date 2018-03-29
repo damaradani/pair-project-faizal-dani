@@ -22,5 +22,8 @@ module.exports = (sequelize, DataTypes) => {
 
     Candidate.hasMany(models.Candidates_job);
   };
+
+  
+
   return Candidate;
 };

@@ -21,5 +21,8 @@ module.exports = (sequelize, DataTypes) => {
 
     Job_vacancy.belongsTo(models.Company);
   };
+
+  
+
   return Job_vacancy;
 };

@@ -3,42 +3,69 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <style>
+      .JobsVacancyView {
+          text-align: left;
+          background-color: #f2f2f2;
+          margin: 20px;
+          padding: 20px;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
 
-    <h2> Login </h2>
+    <% include partials/naVisitor %>
+    <div class="container">
+        <h2> Login </h2>
 
-    <form action="/login" method="POST">
-      Email:<br>
-      <input type="text" name="email" value="">
-      <br>
-      Password:<br>
-      <input type="password" name="password" value="">
-      <br><br>
+        <form action="/login" method="POST">
+          Email:<br>
+          <input type="text" name="email" value="">
+          <br>
+          Password:<br>
+          <input type="password" name="password" value="">
+          <br><br>
 
-      <input type="radio" name="option" value="candidate" checked> Candidate
-      <input type="radio" name="option" value="company"> Company
+          <input type="radio" name="option" value="candidate" checked> Candidate
+          <input type="radio" name="option" value="company"> Company
 
-      <br><br>
-      <input type="submit" value="Login">
-    </form>
+          <br><br>
+          <input type="submit" value="Login">
+        </form>
 
-    <h2> Register </h2>
+        <h2> Register </h2>
 
-    <form action="/register" method="POST">
-      Email:<br>
-      <input type="text" name="email" value="">
-      <br>
-      Password:<br>
-      <input type="password" name="password" value="">
-      <br><br>
+        <form action="/register" method="POST">
+          Email:<br>
+          <input type="text" name="email" value="">
+          <br>
+          Password:<br>
+          <input type="password" name="password" value="">
+          <br><br>
 
-      <input type="radio" name="option" value="candidate" checked> Candidate
-      <input type="radio" name="option" value="company"> Company
+          <input type="radio" name="option" value="candidate" checked> Candidate
+          <input type="radio" name="option" value="company"> Company
 
-      <br><br>
-      <input type="submit" value="Register">
-    </form>
+          <br><br>
+          <input type="submit" value="Register">
+        </form>
 
+      <h2> Job vacancies</h2>
+      <% for(let i = 0; i < Job_vacancy.length; i++) {%>
+        <div class="JobsVacancyView">
+          <h3><%= Job_vacancy[i].name %></h3>
+          <h4><%= Job_vacancy[i].Company.name %><br><br>
+            Location: <%= Job_vacancy[i].Company.location %><br>
+            Sallary: <%= Job_vacancy[i].salary %>
+          </h4>
+
+        </div>
+      <% } %>
+
+  </div>
   </body>
 </html>

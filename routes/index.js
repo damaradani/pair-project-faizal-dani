@@ -5,7 +5,21 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.get('/', function(req, res){
-  res.render('index');
+  db.Company.findAll()
+    .then(company =>{
+      db.Job_vacancy.findAll({include:[db.Company]})
+      .then(Job_vacancy =>{
+          console.log(JSON.stringify(Job_vacancy, null, 2));
+          res.render('index', {company, Job_vacancy});
+      })
+      .catch(err =>{
+        console.log(err.message);
+      })
+    })
+    .catch(err =>{
+      console.log(err.message);
+    })
+
 })
 
 router.post('/login', function(req, res){
@@ -72,25 +86,32 @@ router.post('/register', function(req, res){
       let passwordAfterBcrypt = hash;// console.log(hash);
       // console.log(salt);
       if (req.body.option === 'company') {
+
         db.Company.create({
             email: req.body.email,
             password: passwordAfterBcrypt
           })
           .then(company => {
-            console.log(company);
+            // console.log(company);
+            req.session.company = company;
+            req.session.role = 'company';
+
             res.render('company_form', { company: company })
           })
           .catch()
         // res.render('company_form', {company: req.body})
       } else {
         //Candidates
+
         db.Candidate.create({
             email: req.body.email,
             password: passwordAfterBcrypt
         })
         .then(candidate =>{
-            console.log(candidate);
-            res.render('candidates/editProfile')
+            req.session.candidate = candidate;
+            req.session.role = 'candidate';
+            // console.log(candidate);
+            res.render('candidates/editProfile', {candidate})
         })
         .catch(err =>{
             console.log(err.message);

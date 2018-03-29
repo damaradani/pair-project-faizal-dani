@@ -39,7 +39,7 @@ router.post('/login', function(req, res){
           req.session.role = 'company';
           console.log(req.session.company);
           console.log(req.session.role);
-          res.redirect('/');
+          res.redirect('/company');
           // res.send(req.session.company, req.session.role);
          } else {
           // Passwords don't match

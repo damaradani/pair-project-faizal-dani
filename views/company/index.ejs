@@ -3,56 +3,125 @@
   <head>
     <meta charset="utf-8">
     <title>Company's profile</title>
+    <style>
+    .JobsVacancyView {
+        text-align: left;
+        background-color: #f2f2f2;
+        margin: 20px;
+        padding: 20px;
+    }
+    a:link, a:visited {
+      background: blue;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    </style>
   </head>
   <body>
+    <div class="JobsVacancyView">
+      <h3>Company Profile:</h3>
 
-    <a href="/company/:id/edit">Edit Profile</a>
-
-
-    <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
-      <div>
-        <%= jobs.Job_vacancies[i].name %>
-        <%= jobs.Job_vacancies[i].field_of_work %>
-        <%= jobs.Job_vacancies[i].salary %>
-        <%= jobs.Job_vacancies[i].status %>
-      </div>
-    <% } %>
-
-    <a href="/company/addvacancy/????">Add Vacancies</a>
-
-    <table>
-      <thead>
-        <th> Name </th>
-        <th> Age </th>
-        <th> Location </th>
-        <th> Email </th>
-        <th> Field of Work </th>
-        <th> Experience </th>
-        <th> Apply to </th>
-        <th> Action </th>
-      </thead>
-
-      <tbody>
-        <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
-          <% for (var j = 0; j < jobs.Job_vacancies[i].Candidates.length; j++) {%>
+      <table>
+        <thead>
+          <th> Company's Name </th>
+          <th> Location </th>
+          <th> Email </th>
+          <th> Website </th>
+          <th> Phone </th>
+        </thead>
+        <tbody>
             <tr>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].name %> </td>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].age %> </td>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].location %> </td>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].email %> </td>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].field_of_work %> </td>
-              <td> <%= jobs.Job_vacancies[i].Candidates[j].experience %> </td>
-              <td> <%= jobs.Job_vacancies[i].name %> </td>
+              <td><%= jobs.name %></td>
+              <td><%= jobs.location %></td>
+              <td><%= jobs.email %></td>
+              <td><%= jobs.phone %></td>
+            </tr>
+
+        </tbody>
+      <table>
+
+
+      <a href="/company/<%= jobs.id %>/edit">Edit Profile</a>
+    </div>
+    <br>
+
+
+    <div class="JobsVacancyView">
+      <h3>Your Company's Vacancies:</h3>
+
+      <table>
+        <thead>
+          <th> Position </th>
+          <th> Field of Work </th>
+          <th> Salary </th>
+          <th> Status </th>
+          <th> Action </th>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
+            <tr>
+              <td><%= jobs.Job_vacancies[i].name %></td>
+              <td><%= jobs.Job_vacancies[i].field_of_work %></td>
+              <td><%= jobs.Job_vacancies[i].salary %></td>
+              <td><%= jobs.Job_vacancies[i].status %></td>
               <td>
-                <a href="/">Accept</a>
-                |
-                <a href="/">Decline</a>
+                <a href="/<%= jobs.Job_vacancies[i].id %>/delete">Delete</a>
               </td>
             </tr>
-          <% } %>
-        <% } %>
-      </tbody>
-    </table>
 
+          <% } %>
+        </tbody>
+      <table>
+
+      <br><br>
+      <a href="/company/addvacancy/<%= jobs.id %>">Add Vacancies</a>
+    </div>
+    <br>
+
+
+    <div class="JobsVacancyView">
+      <h3>Applicants:</h3>
+
+      <table>
+        <thead>
+          <th> Name </th>
+          <th> Age </th>
+          <th> Location </th>
+          <th> Email </th>
+          <th> Field of Work </th>
+          <th> Experience </th>
+          <th> Apply to </th>
+          <th> Status </th>
+          <th> Action </th>
+        </thead>
+
+        <tbody>
+          <% for (var i = 0; i < jobs.Job_vacancies.length; i++) {%>
+            <% for (var j = 0; j < jobs.Job_vacancies[i].Candidates.length; j++) {%>
+              <tr>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].name %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].age %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].location %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].email %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].field_of_work %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].experience %> </td>
+                <td> <%= jobs.Job_vacancies[i].name %> </td>
+                <td> <%= jobs.Job_vacancies[i].Candidates[j].Candidates_job.status %> </td>
+                <td>
+                  <%let candidateid = jobs.Job_vacancies[i].Candidates[j].Candidates_job.CandidateId%>
+                  <%let jobid = jobs.Job_vacancies[i].Candidates[j].Candidates_job.JobVacancyId%>
+                  <a href="/company/<%= candidateid %>/<%= jobid %>/accept">Accept</a>
+                  |
+                  <a href="/company/<%= candidateid %>/<%= jobid %>/decline">Decline</a>
+                </td>
+              </tr>
+            <% } %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

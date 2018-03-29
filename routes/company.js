@@ -15,11 +15,12 @@ router.use(function(req, res, next){
   }
 })
 
-router.get('/', (req, res) => {
 
+router.get('/', (req, res) => {
+let id = req.session.company.id
   db.Company.findOne(
       {
-        where:{id:1}, //belom ada session jadi pake id 1 dulu buat coba
+        where:{id:id}, //belom ada session jadi pake id 1 dulu buat coba
         include:[
           {
             model: db.Job_vacancy,
@@ -46,10 +47,10 @@ router.get('/', (req, res) => {
 })
 
 router.get('/addvacancy/:id', (req, res) => {
-  res.render('company/vacancyform')
+  res.render('company/vacancyform', { id: req.params.id})
 })
 router.post('/addvacancy/:id', (req, res) => {
-  db.Item.create({
+  db.Job_vacancy.create({
     name: req.body.name,
     field_of_work: req.body.field_of_work,
     required_gender: req.body.required_gender,
@@ -60,7 +61,7 @@ router.post('/addvacancy/:id', (req, res) => {
     status: 'open',
     CompanyId: req.params.id
   }).then( itemdata => {
-    res.render('/company')
+    res.redirect('/company')
   })
 })
 
@@ -82,10 +83,39 @@ router.post('/:id/edit', (req, res) => {
     where: { id: req.params.id }
   }).then(
     // (companyUpdated) => {
-  res.render('/company')
+    res.redirect('/company')
   //}
 )
 })
+
+router.get('/:candidateid/:jobid/accept/', (req, res) => {
+  db.Candidates_job.update({
+    status: 'accepted'
+  },{
+    where: { CandidateId: req.params.candidateid, JobVacancyId: req.params.jobid}
+  }).then(
+  res.redirect('/company')
+)
+})
+
+router.get('/:candidateid/:jobid/decline/', (req, res) => {
+  db.Candidates_job.update({
+    status: 'declined'
+  },{
+    where: { CandidateId: req.params.candidateid, JobVacancyId: req.params.jobid}
+  }).then(
+  res.redirect('/company')
+)
+})
+
+router.get('/:id/delete/', (req, res) => {
+  db.Job_vacancy.destroy({
+    where: { id: req.params.id }
+  }).then(
+  res.redirect('/company')
+)
+})
+
 
 
 

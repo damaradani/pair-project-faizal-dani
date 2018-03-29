@@ -14,15 +14,25 @@ router.use(function(req, res, next){
 
 //halaman utama Candidates
 router.get('/', function(req, res){
-  db.Job_vacancy.findAll(
-        {include:[db.Company]}
-      )
+  // db.Job_vacancy.findAll(
+  //       {include:[db.Company]}
+  //     )
+  //   .then(Jobs =>{
+  //     //console.log(JSON.stringify(x, null, 2));
+  //     res.render('candidates/index', {Jobs})
+  //   })
+  //   .catch(err =>{
+  //     console.log(err);
+  //   })
+  let candidateId = req.session.candidate.id;
+
+  db.Candidates_job.showJobVacancy(candidateId, db.Candidate, db.Job_vacancy, db.Company)
     .then(Jobs =>{
-      //console.log(JSON.stringify(x, null, 2));
+      console.log(JSON.stringify(Jobs, null, 2));
       res.render('candidates/index', {Jobs})
     })
     .catch(err =>{
-      console.log(err);
+      console.log(err.message);
     })
 
 })
@@ -32,7 +42,7 @@ router.get('/', function(req, res){
 router.get('/edit', function(req, res){
 
   let candidate = req.session.candidate;
-
+  console.log(candidate);
   res.render('candidates/editProfile', {candidate})
 })
 

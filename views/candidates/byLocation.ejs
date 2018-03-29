@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>
+
+    </title>
+    <style>
+    .JobsVacancyView {
+        text-align: left;
+        background-color: #f2f2f2;
+        margin: 20px;
+        padding: 20px;
+    }
+    a:link, a:visited {
+      background: white;
+      color: black;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <% include ../partials/naCandidate %>
+
+  <div class="container">
+    <body>
+      <% for(let i = 0; i < Jobs.length; i++) {%>
+        <div class="JobsVacancyView">
+          <h3><%= Jobs[i].name %></h3>
+          <h4><%= Jobs[i].Company.name %><br><br>
+            Location: <%= Jobs[i].Company.location %><br>
+            Sallary: <%= Jobs[i].salary %>
+          </h4>
+          <a href="/candidates/apply/<%= Jobs[i].id %>">Apply</a>
+        </div>
+      <% } %>
+    </body>
+  </div>
+</html>

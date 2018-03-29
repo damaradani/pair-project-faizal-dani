@@ -45,6 +45,39 @@ router.get('/', function(req, res){
 
 })
 
+router.get('/byLocation', function(req, res){
+  let candidateId = req.session.candidate.id;
+  db.Candidate.findOne(
+     {
+       where:{id:candidateId}
+     }
+     )
+   .then(Candidate =>{
+     console.log(Candidate);
+     db.Job_vacancy.findAll(
+         {
+           include: [{
+             model: db.Company,
+             where: { location: Candidate.location},
+             as: 'Company' // specifies how we want to be able to access our joined rows on the returned data
+           }]
+           // ,
+           //   where: {db.Company.location : 'Depok'}
+
+         })
+       .then(Jobs =>{
+         console.log(JSON.stringify(Jobs, null, 2));
+         res.render('candidates/byLocation', {Jobs})
+       })
+       .catch(err =>{
+         console.log(err);
+       })
+   })
+   .catch(err =>{
+     console.log(err);
+   })
+})
+
 
 //halaman Edit Profile
 router.get('/edit', function(req, res){

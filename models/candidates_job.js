@@ -48,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise(function(resolve, reject){
       Candidates_job.findAll(
         {
-          where:{CandidateId:{$ne:CandidateId}},
           include:[
             {
-              model:Candidate
+              model:Candidate,
+              required: true
             },
             {
               model: Job_vacancy,

@@ -26,14 +26,22 @@ router.get('/', function(req, res){
   //   })
   let candidateId = req.session.candidate.id;
 
-  db.Candidates_job.showJobVacancy(candidateId, db.Candidate, db.Job_vacancy, db.Company)
-    .then(Jobs =>{
+  // db.Candidates_job.showJobVacancy(candidateId, db.Candidate, db.Job_vacancy, db.Company)
+  //   .then(Jobs =>{
+  //     console.log(JSON.stringify(Jobs, null, 2));
+  //     res.render('candidates/index', {Jobs})
+  //   })
+  //   .catch(err =>{
+  //     console.log(err.message);
+  //   })
+  db.Job_vacancy.findAll({include:[db.Company]})
+  .then(Jobs =>{
       console.log(JSON.stringify(Jobs, null, 2));
-      res.render('candidates/index', {Jobs})
-    })
-    .catch(err =>{
-      console.log(err.message);
-    })
+      res.render('candidates/index', {Jobs});
+  })
+  .catch(err =>{
+    console.log(err.message);
+  })
 
 })
 
@@ -110,13 +118,14 @@ router.get('/apply/:Jobsid', function(req, res){
       JobVacancyId: req.params.Jobsid,
       status: 'Applied'
     }
+    console.log('Kesini');
     db.Candidates_job.create(candidates_Jobs)
       .then(result =>{
         // req.locals.alert = `You Succesfully apllied for ${}`;
-        res.redirect('/candidates/apply');
+        res.send('Succesfully Applied Jobs');
       })
       .catch(err =>{
-        console.log(err.message);
+        console.log(err);
       })
 
     // console.log(candidates_Jobs);

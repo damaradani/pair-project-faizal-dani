@@ -37,7 +37,7 @@ router.post('/login', function(req, res){
           // console.log('Kesini');
           req.session.company = company;
           req.session.role = 'company';
-          req.locals.role = req.session.role;
+
           console.log(req.session.company);
           console.log(req.session.role);
           res.redirect('/company');
@@ -62,10 +62,9 @@ router.post('/login', function(req, res){
 
           req.session.candidate = candidate;
           req.session.role = 'candidate';
-          req.locals.role = req.session.role;
           // console.log(req.session.candidate);
           // console.log(req.session.role);
-          res.redirect('/');
+          res.redirect('/candidates');
           // res.send(req.session.company, req.session.role);
          } else {
            res.send('Password not match')

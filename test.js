@@ -49,14 +49,22 @@ const db = require('./models/');
 //   })
 //   .catch()
 
-db.Candidates_job.showCandidatesApply(5, db.Candidate, db.Job_vacancy, db.Company)
-  .then(candidatesJob =>{
-    console.log(JSON.stringify(candidatesJob, null, 2));
+// db.Candidates_job.showCandidatesApply(5, db.Candidate, db.Job_vacancy, db.Company)
+//   .then(candidatesJob =>{
+//     console.log(JSON.stringify(candidatesJob, null, 2));
+//   })
+//   .catch(err =>{
+//     console.log(err);
+//   })
+
+db.Candidates_job.showJobVacancy(5, db.Candidate, db.Job_vacancy, db.Company)
+  .then(Job_vacancy =>{
+    console.log(JSON.stringify(Job_vacancy, null, 2));
   })
   .catch(err =>{
-    console.log(err);
+    console.log(err.message);
   })
-
+  
 // db.Job_vacancy.findAll(
 //       {include:[db.Company]}
 //     )

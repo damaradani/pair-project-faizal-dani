@@ -26,16 +26,19 @@
   </head>
 
   <% include ../partials/naCandidate %>
-  <body>
-    <% for(let i = 0; i < Jobs.length; i++) {%>
-      <div class="JobsVacancyView">
-        <h3><%= Jobs[i].Job_vacancy.name %></h3>
-        <h4><%= Jobs[i].Job_vacancy.Company.name %><br><br>
-          Location: <%= Jobs[i].Job_vacancy.Company.location %><br>
-          Sallary: <%= Jobs[i].Job_vacancy.salary %>
-        </h4>
-        <a href="/candidates/apply/<%= Jobs[i].id %>">Apply</a>
-      </div>
-    <% } %>
-  </body>
+
+  <div class="container">
+    <body>
+      <% for(let i = 0; i < Jobs.length; i++) {%>
+        <div class="JobsVacancyView">
+          <h3><%= Jobs[i].Job_vacancy.name %></h3>
+          <h4><%= Jobs[i].Job_vacancy.Company.name %><br><br>
+            Location: <%= Jobs[i].Job_vacancy.Company.location %><br>
+            Sallary: <%= Jobs[i].Job_vacancy.salary %>
+          </h4>
+          <a href="/candidates/apply/<%= Jobs[i].id %>">Apply</a>
+        </div>
+      <% } %>
+    </body>
+  </div>
 </html>

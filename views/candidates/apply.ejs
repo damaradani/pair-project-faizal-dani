@@ -1,32 +1,39 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
-  <body>
-    <h2>Applied Job vacancies</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Position</th>
-          <th>Company</th>
-          <th>Apply Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let i = 0; i < candidatesJob.length; i++) {%>
+  <% include ../partials/naCandidate %>
+  <div class="container">
+    <body>
+      <h2>Applied Job vacancies</h2>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= candidatesJob[i].Job_vacancy.name %></td>
-            <td><%= candidatesJob[i].Job_vacancy.Company.name %></td>
-            <td><%= convertDate(candidatesJob[i].createdAt) %></td>
-            <td><%= candidatesJob[i].status %></td>
-            <td>
-              <a href="/candidates/apply/delete/<%= candidatesJob[i].CandidateId %>/<%= candidatesJob[i].JobVacancyId %>" onClick="return confirm('delete this Items: <%= candidatesJob[i].Job_vacancy.name%>?')">Delete</a>
-            </td>
+            <th>Position</th>
+            <th>Company</th>
+            <th>Apply Date</th>
+            <th>Status</th>
+            <th>Action</th>
           </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </body>
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < candidatesJob.length; i++) {%>
+            <tr>
+              <td><%= candidatesJob[i].Job_vacancy.name %></td>
+              <td><%= candidatesJob[i].Job_vacancy.Company.name %></td>
+              <td><%= convertDate(candidatesJob[i].createdAt) %></td>
+              <td><%= candidatesJob[i].status %></td>
+              <td>
+                <a href="/candidates/apply/delete/<%= candidatesJob[i].CandidateId %>/<%= candidatesJob[i].JobVacancyId %>" onClick="return confirm('delete this Items: <%= candidatesJob[i].Job_vacancy.name%>?')">Delete</a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </body>
+  </div>
 </html>
